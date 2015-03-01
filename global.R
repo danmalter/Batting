@@ -5,6 +5,8 @@ require(ggplot2)
 require(plyr)
 library(dplyr)
 library(markdown)
+library(shiny)
+library(shinydashboard)
 
 Master$name <- paste(Master$nameFirst, Master$nameLast, sep=' ')
 
