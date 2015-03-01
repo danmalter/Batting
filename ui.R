@@ -81,7 +81,7 @@ shinyUI(dashboardPage(skin="black",
                           fluidRow(
                             box(title = "Author: Danny Malter", background = "black", width=7, collapsible = TRUE,
                                 
-                                helpText(p(strong("This application is meant to compare the offensive statistics for any player in MLB history between 1901 adn 2013."))),
+                                helpText(p(strong("This application is meant to compare the offensive statistics for any player in MLB history between 1901 and 2013."))),
                                 
                                 helpText(p("Please contact",
                                            a(href ="https://twitter.com/danmalter", "Danny on twitter",target = "_blank"),
