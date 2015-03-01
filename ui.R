@@ -1,18 +1,15 @@
 ## ui.R
-devtools::install_github("rstudio/shinydashboard")
-library(shinydashboard)
-library(shiny)
 
-dashboardPage(skin="black",
+shinyUI(dashboardPage(skin="black",
               dashboardHeader(title = "Hitters in Baseball"),
               dashboardSidebar(
                 sidebarMenu(
                 menuItem("Offensive Statistics", tabName = "offensiveStats", icon = icon("star-o")),
                 menuItem("About", tabName = "about", icon = icon("question-circle")),
                 menuItem("Source code", icon = icon("file-code-o"), 
-                         href = "https://github.com/danmalter"),
+                         href = "https://github.com/danmalter/Batting"),
                 menuItem(
-                  list(selectInput("statistic", "Statistic:",
+                  list(selectInput("statistic", label = h5("Statistic:"),
                                             list("Runs" = "R",
                                                  "Hits" = "H", 
                                                  "Doubles" = "X2B",
@@ -36,7 +33,7 @@ dashboardPage(skin="black",
                                                  "On Base Plus Slugging" = "OPS",
                                                  "Batting Avg. on Balls in Play" = "BABIP")),
                     selectInput("player",
-                                label = "Top 50 HR Hitters (RED LINE)",
+                                label = h5("Top 50 HR Hitters (RED LINE)"),
                                 #choices = players_in_menu,    
                                 choices = list("1. Barry Bonds"="bondsba01", "2. Hank Aaron"="aaronha01", "3. Babe Ruth"="ruthba01", "4. Willie Mays"="mayswi01", 
                                                "5. Alex Rodriguez"="rodrial01", "6. Ken Griffey, Jr."="griffke02", "7. Jim Thome"="thomeji01", 
@@ -101,11 +98,23 @@ dashboardPage(skin="black",
                           )
                   ),
                   tabItem(tabName = "offensiveStats",
-                          h2("Plot of Offensive Statistics"),
+                          h4(textOutput("caption")),
+                          (textOutput("legend1")),
+                          tags$head(tags$style("#legend1{color: red;
+                         font-size: 12px;;
+                         }")),
+                          (textOutput("legend2")),
+                          tags$head(tags$style("#legend2{color: black;
+                         font-size: 12px;;
+                         }")),
+                          (textOutput("legend3")),
+                          tags$head(tags$style("#legend3{color: blue;
+                         font-size: 12px;;
+                         }")),
                           
                           HTML('<br/>'),
                           
-                            box(plotOutput("plot"), title = "Offensive Statistics", width=11, collapsible = TRUE),
+                            box(plotOutput("plot"), title = "Plot of Offensive Statistics", width=11, collapsible = TRUE),
                           HTML('<br/>'),
                             box(dataTableOutput("myTable"), title = "Table of Players", width=11, collapsible = TRUE))
                               
@@ -116,4 +125,4 @@ dashboardPage(skin="black",
                   )
                   
         )
-              
+)              
